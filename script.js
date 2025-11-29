@@ -68,23 +68,23 @@ hoisting - variables declared with var are hoisted and initialized with undefine
 //Primitive data types are stored in stack memory
 //Non-primitive data types are stored in heap memory
 
-let p1 = 10; //1234 unique memory address
-let p2 = p1; //4566 copy by value
+// let p1 = 10; //1234 unique memory address
+// let p2 = p1; //4566 copy by value
 
-p1 = 20;
+// p1 = 20;
 
-console.log(p1, "p1");
-console.log(p2, "p2");
+// console.log(p1, "p1");
+// console.log(p2, "p2");
 
-//non-primitive data types
+// //non-primitive data types
 
-let obj1 = { age: 10 }; // unique memory address 1234
-// let obj2 = obj1; //1234 copy by reference
-let obj2 = { ...obj1 }; //3344343 copy by reference
-obj2.age = 20;
+// let obj1 = { age: 10 }; // unique memory address 1234
+// // let obj2 = obj1; //1234 copy by reference
+// let obj2 = { ...obj1 }; //3344343 copy by reference
+// obj2.age = 20;
 
-console.log(obj1.age, "obj1");
-console.log(obj2.age, "obj2");
+// console.log(obj1.age, "obj1");
+// console.log(obj2.age, "obj2");
 
 // let arr1 = [1, 2, 3]; // unique memory address 5678
 // let arr2 = arr1; //5678 copy by reference
@@ -96,8 +96,8 @@ console.log(obj2.age, "obj2");
 
 //operators
 //arithmetic operators +, -, *, /, %
-let a = 10;
-let b = 11;
+// let a = 10;
+// let b = 11;
 
 // console.log("Addition:", a + b); //13
 // console.log("Subtraction:", a - b); //7
@@ -215,9 +215,136 @@ let b = 11;
 // }
 
 //while loop
-let count = 10;
-while (count > 0) {
-  console.log("Count:", count);
-  count++;
-  console.log("Internet is connceted");
+// let count = 10;
+// while (count > 0) {
+//   console.log("Count:", count);
+//   count++;
+//   console.log("Internet is connceted");
+// }
+
+//functions in JavaScript
+//function declaration
+//function expression
+//arrow function - ES6 feature
+
+console.log(greet("Alice"));
+
+//function declaration
+//Hosting - function declarations are hoisted
+function greet(name) {
+  console.log(name, "name");
+  return "Greeting sent to " + name;
 }
+
+console.log(greet("Bob"));
+
+//function expression
+//not hoisted
+const add = function (a, b) {
+  return a + b;
+};
+
+console.log("Addition:", add(5, 10));
+console.log("Addition:", add(20, 30));
+
+//arrow function - ES6 feature
+// not hoisted
+const newAdd = (a, b) => a + b;
+
+console.log("Addition:", newAdd(15, 25));
+console.log("Addition:", newAdd(12, 25));
+
+//Arrays in JavaScript
+let fruits = ["Apple", "Banana", "Orange", 1, true, null, undefined, [], {}];
+console.log("Fruits array:", fruits);
+console.log("First fruit:", fruits[0]);
+
+//Array methods
+//push, pop, shift, unshift, indexOf, splice, slice, forEach, map, filter, reduce
+
+//Objects in JavaScript
+let car = {
+  make: "Toyota",
+  model: "Camry",
+  year: 2020,
+  isElectric: false,
+  colors: ["Red", "Blue", "Green"]
+};
+
+const toyataCar = [
+  { make: "Toyota", model: "Corolla", year: 2021 },
+  { make: "Toyota", model: "RAV4", year: 2022 },
+  { make: "Toyota", model: "Highlander", year: 2023 }
+];
+
+console.log("Car object:", car);
+console.log("Car make:", car.make); // Dot notation
+console.log("Car model:", car["model"]); // Bracket notation
+
+//Object methods
+//Object.keys(), Object.values(), Object.entries(), Object.assign()
+
+//DOM Manipulation using JavaScript
+//DOM - Document Object Model
+//Selecting elements - getElementById, getElementsByClassName, getElementsByTagName, querySelector, querySelectorAll
+//Manipulating elements - innerHTML, textContent, style, classList, setAttribute, getAttribute
+//Creating elements - createElement, appendChild, removeChild
+//Event handling - addEventListener , removeEventListener
+
+// Selecting elements
+// const heading1 = {
+//   textContent: "New arrival"
+// };
+
+// const heading = document.getElementById("new-arrival");
+// // heading1.textContent = "Latest Products";
+// console.log("Heading element:", heading);
+// const h1Tag = heading.querySelector("h1");
+// console.log("H1 tag inside heading:", h1Tag.innerText);
+// const productCard = document.getElementsByClassName("product-card");
+// console.log("Product cards:", productCard[0].innerText);
+
+// const buttons = document.getElementsByTagName("button");
+// console.log("Buttons:", buttons);
+
+// const heroSection = document.querySelector(".hero h1");
+// console.log("Hero section heading:", heroSection.innerText);
+
+// const productCards = document.querySelectorAll(".product-card");
+// console.log("All product cards:", productCards);
+
+// //Manipulating elements
+// h1Tag.textContent = "Latest Arrivals";
+// heading.innerHTML =
+//   "<h4 class='content'>Lastest Content</h4> <button style='color:red'> Click</button>";
+// buttons[0].style.color = "blue";
+// heading.classList.add("highlighted");
+// console.log("Heading classes:", heading.classList);
+// heading.setAttribute("data-heading", "selvam");
+// heading.setAttribute("data-type", "header");
+// console.log(
+//   "Heading data-type attribute:",
+//   heading.getAttribute("data-heading")
+// );
+
+// const commentSection = document.getElementById("comment");
+// //Creating elements
+// const newComment1 = document.createElement("p");
+// newComment1.textContent = "This is a new section created using JS";
+// const newComment2 = document.createElement("p");
+// newComment2.textContent = "This is another comment added using JS";
+// //Appending elements
+// commentSection.appendChild(newComment1);
+// // commentSection.append(newComment2); // verify and let you know
+// //Removing elements
+// commentSection.removeChild(newComment1);
+const shopNowEvent = function () {
+  alert("Shop Now button clicked!");
+};
+
+//Event handling
+const shopNowButton = document.querySelector(".hero button");
+// shopNowButton.addEventListener("click", function () {
+//   alert("Shop Now button clicked!");
+// });
+shopNowButton.addEventListener("click", shopNowEvent);
