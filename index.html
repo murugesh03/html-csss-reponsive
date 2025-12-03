@@ -23,7 +23,7 @@
         <!--Main section-->
         <main class="main">
             <!-- HERO BANNER -->
-            <section class="hero" id='new-arrival'>
+            <section class="hero" id="new-arrival">
                 <h1>New Arrivals</h1>
                 <p>Trendy, Affordable & Delivered Fast</p>
                 <button>Shop Now</button>
@@ -33,48 +33,65 @@
             <section class="products-section">
                 <h2>Featured Products</h2>
 
-                <div class="product-grid">
-
-                    <div class="product-card">
-                        <img src="https://via.placeholder.com/300x180" alt="">
+                <div class="product-grid" id="products">
+                    <div class="product-card" data-id="1">
+                        <img src="https://via.placeholder.com/300x180" alt="" />
                         <h3>Classic Shoes</h3>
                         <p>$49.99</p>
+                        <p>
+                            <label> Qty</label>
+                            <input class="qty" type="text" />
+                        </p>
                         <button>Add to Cart</button>
                     </div>
 
-                    <div class="product-card">
-                        <img src="https://via.placeholder.com/300x180" alt="">
+                    <div class="product-card" data-id='2'>
+                        <img src="https://via.placeholder.com/300x180" alt="" />
                         <h3>Smart Watch</h3>
                         <p>$99.99</p>
+                        <p>
+                            <label> Qty</label>
+                            <input class="qty" type="text" />
+                        </p>
                         <button>Add to Cart</button>
                     </div>
 
-                    <div class="product-card">
-                        <img src="https://via.placeholder.com/300x180" alt="">
+                    <div class="product-card" data-id="3">
+                        <img src="https://via.placeholder.com/300x180" alt="" />
                         <h3>Wireless Earbuds</h3>
                         <p>$59.99</p>
+                        <p>
+                            <label> Qty</label>
+                            <input class="qty" type="text" />
+                        </p>
                         <button>Add to Cart</button>
                     </div>
 
-                    <div class="product-card">
-                        <img src="https://via.placeholder.com/300x180" alt="">
+                    <div class="product-card" data-id="4">
+                        <img src="https://via.placeholder.com/300x180" alt="" />
                         <h3>Backpack</h3>
                         <p>$39.99</p>
+                        <p>
+                            <label> Qty</label>
+                            <input class="qty" type='number' />
+                        </p>
                         <button>Add to Cart</button>
                     </div>
 
-                    <div class="product-card">
-                        <img src="https://via.placeholder.com/300x180" alt="">
+                    <div class="product-card" data-id="5">
+                        <img src="https://via.placeholder.com/300x180" alt="" />
                         <h3>Smart Watch</h3>
                         <p>$99.99</p>
+                        <p>
+                            <label> Qty</label>
+                            <input class="qty" type="text" />
+                        </p>
                         <button>Add to Cart</button>
                     </div>
-
                 </div>
             </section>
 
-            <section id="comment">
-            </section>
+            <section id="comment"></section>
         </main>
 
         <!-- FOOTER -->
@@ -84,6 +101,11 @@
                 <a href="#">FB</a>
                 <a href="#">IG</a>
                 <a href="#">TW</a>
+            </div>
+            <div>
+                <label> Subscribe Email</label>
+                <input type="text" id="emailSubscribe" />
+                <button>Subscribe</button>
             </div>
         </footer>
     </div>
