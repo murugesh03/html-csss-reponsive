@@ -624,3 +624,269 @@ hoisting - variables declared with var are hoisted and initialized with undefine
 //---- Ending with object destructuring ----//
 
 //---------------------------------------------------------------
+
+//ES-6 Features
+
+//let and const - Completed
+//Destructing Assignment - Completed
+//arrow functions - completed
+//Default parameters
+//Spread Operator
+//Rest operator
+//For of loop
+//Enhanced object literals
+//Modual import and export - React explanion
+//class
+//Promises
+//async await
+
+//Default Parameters
+function getValue(a, b = 2) {
+  console.log(a, b);
+  return a * b;
+}
+
+console.log(getValue(1, 4));
+
+function accessObj(a, b = {}) {
+  console.log(a, b);
+  console.log(Object.keys(b).length);
+  if (Object.keys(b).length) {
+    // business logic
+  }
+}
+accessObj({ name: "sai" });
+
+//Spread Operator
+
+const arr = [12, 4, 5, 6, 3];
+
+const arr3 = [122, 134];
+
+const arr2 = [...arr3, ...arr];
+
+console.log(arr2);
+
+//Rest Operator
+function getMutiples(...param) {
+  console.log(param, "reset operator");
+  const [a, b, c, d = 1, e, f] = param;
+  console.log(a, b, c, d, e, f);
+}
+
+getMutiples(1, 4, 5);
+
+//For of
+
+const names = ["raj", "ragu", "kamal"];
+// 0<3, 1<3,2<3,3<3
+for (let i = 0; i < names.length; i++) {
+  console.log(names[i]);
+}
+
+for (let name of names) {
+  console.log(name);
+}
+
+//Enhanced object literals
+const objName = "raj";
+const age = 25;
+const para = {
+  studName: objName,
+  age
+};
+console.log(para);
+
+//Template literals
+const firstName = "Raj";
+const secondName = "Kumar";
+console.log(firstName + " " + secondName + "good morning");
+console.log(`${firstName} ${secondName} good morning`);
+
+//Class
+
+// const car = {
+//   brand: "Toyato",
+//   model: 2019,
+//   start: function () {
+//     console.log(this.brand + this.model + "is started");
+//   }
+// };
+
+class Car {
+  constructor(brand, model) {
+    (this.brand = brand), (this.model = model);
+  }
+  start() {
+    console.log(this.brand + " " + this.model + " " + "is started");
+  }
+}
+
+const toyataCar = new Car("Toyata", 2019);
+const hondaCar = new Car("Honda", 2018);
+
+toyataCar.start();
+
+//Promise
+//Syncronous and asyncronous
+
+const student = new Promise((resole, reject) => {
+  setTimeout(() => resole("Success!"), 10000);
+});
+student.then((res) => console.log(res)).catch((error) => console.log(error));
+
+//POST, PUT, PATCH, DELETE, GET
+
+async function userInfo() {
+  fetch("https://jsonplaceholder.typicode.com/posts")
+    .then((data) => data.json())
+    .then((data) => data.find((data) => data.id == 1))
+    .then((data) => console.log(data, "this is post"))
+    .catch((error) => console.log(error, "this is car error"));
+}
+userInfo();
+
+// const getCarsInfo = async () => {};
+async function getCarsInfo() {
+  try {
+    const res = await fetch("https://jsonplaceholder.typicode.com/posts");
+    const posts = await res.json();
+    const firstPost = posts.find((post) => post.id == 1);
+    console.log(res, "this si res");
+    console.log(posts, "this is posts");
+    console.log(firstPost, "firstPost");
+  } catch (error) {
+    console.log(error);
+  }
+}
+//-----------------------------------------------
+/*
+ASYNC JAVASCRIPT - LAYMAN + TECHNICAL EXPLANATIONS WITH CODE
+Copy-paste this entire file into your browser console or HTML file to learn!
+*/
+
+////////////////////////////////////////////////////////////////////////
+// 1. CALLBACKS & CALLBACK HELL
+////////////////////////////////////////////////////////////////////////
+
+/*
+LAYMAN: Like giving friends tasks one after another—each waits for previous one, 
+creating messy chain of instructions.
+
+TECHNICAL: Callbacks are functions passed as arguments to execute later. 
+Nested callbacks create "callback hell" with deep indentation. [web:1]
+*/
+
+function fetchData(callback) {
+  setTimeout(() => callback("Data fetched!"), 2000);
+}
+fetchData((data) => console.log(data)); // Clean single callback
+
+////////////////////////////////////////////////////////////////////////
+// 2. PROMISES
+////////////////////////////////////////////////////////////////////////
+
+/*
+LAYMAN: A real-life promise that something will succeed or fail—you wait and react.
+
+TECHNICAL: Objects representing async operations with states: 
+pending, fulfilled (resolved), rejected. [web:1]
+*/
+
+const myPromise = new Promise((resolve, reject) => {
+  setTimeout(() => resolve("Success!"), 1000);
+});
+myPromise
+  .then((result) => console.log(result))
+  .catch((err) => console.error(err));
+
+////////////////////////////////////////////////////////////////////////
+// 3. PROMISE CHAINING
+////////////////////////////////////////////////////////////////////////
+
+/*
+LAYMAN: Line up tasks so each starts only after previous promise finishes.
+
+TECHNICAL: Return values/promises from .then() to chain operations. 
+One .catch() handles errors chain-wide. [web:1]
+*/
+
+fetch("https://jsonplaceholder.typicode.com/todos/1")
+  .then((res) => {
+    if (!res.ok) throw new Error("Network error");
+    return res.json();
+  })
+  .then((data) => console.log("Chained data:", data))
+  .catch((err) => console.error(err));
+
+////////////////////////////////////////////////////////////////////////
+// 4. ASYNC / AWAIT
+////////////////////////////////////////////////////////////////////////
+
+/*
+LAYMAN: Write "wait here" in code so it reads like normal steps.
+
+TECHNICAL: async functions return promises. await pauses until promise resolves. 
+Use try/catch for errors. [web:1]
+*/
+
+async function getData() {
+  try {
+    const res = await fetch("https://jsonplaceholder.typicode.com/todos/1");
+    if (!res.ok) throw new Error("Network error");
+    const data = await res.json();
+    console.log("Async/await data:", data);
+  } catch (err) {
+    console.error(err);
+  }
+}
+getData();
+
+////////////////////////////////////////////////////////////////////////
+// 5. FETCH API
+////////////////////////////////////////////////////////////////////////
+
+/*
+LAYMAN: Send letter to website, wait for reply with data.
+
+TECHNICAL: fetch(url) returns Response promise. Check response.ok (200-299) 
+before .json(). [web:1]
+*/
+
+async function fetchData() {
+  try {
+    const res = await fetch("https://jsonplaceholder.typicode.com/todos/1");
+    if (!res.ok) throw new Error("Failed");
+    const data = await res.json();
+    console.log("Fetch API data:", data);
+  } catch (err) {
+    console.error(err);
+  }
+}
+fetchData();
+
+////////////////////////////////////////////////////////////////////////
+// 6. ERROR HANDLING
+////////////////////////////////////////////////////////////////////////
+
+/*
+LAYMAN: Safety nets to catch problems without crashing.
+
+TECHNICAL: .catch() for promises, try/catch for async/await and sync code. [web:2]
+*/
+
+// Promise error handling
+Promise.reject("Error!").catch((err) => console.error("Promise caught:", err));
+
+async function safeAsync() {
+  try {
+    await Promise.reject("Async error!");
+  } catch (err) {
+    console.error("Async caught:", err);
+  }
+}
+safeAsync();
+
+//////////////////////////////////////////////////////////////////////
+
+// -----------------------------------------------------------------------------
