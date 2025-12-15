@@ -777,10 +777,10 @@ TECHNICAL: Callbacks are functions passed as arguments to execute later.
 Nested callbacks create "callback hell" with deep indentation. [web:1]
 */
 
-function fetchData(callback) {
-  setTimeout(() => callback("Data fetched!"), 2000);
-}
-fetchData((data) => console.log(data)); // Clean single callback
+// function fetchData(callback) {
+//   setTimeout(() => callback("Data fetched!"), 2000);
+// }
+// fetchData((data) => console.log(data)); // Clean single callback
 
 ////////////////////////////////////////////////////////////////////////
 // 2. PROMISES
@@ -793,12 +793,12 @@ TECHNICAL: Objects representing async operations with states:
 pending, fulfilled (resolved), rejected. [web:1]
 */
 
-const myPromise = new Promise((resolve, reject) => {
-  setTimeout(() => resolve("Success!"), 1000);
-});
-myPromise
-  .then((result) => console.log(result))
-  .catch((err) => console.error(err));
+// const myPromise = new Promise((resolve, reject) => {
+//   setTimeout(() => resolve("Success!"), 1000);
+// });
+// myPromise
+//   .then((result) => console.log(result))
+//   .catch((err) => console.error(err));
 
 ////////////////////////////////////////////////////////////////////////
 // 3. PROMISE CHAINING
@@ -811,13 +811,13 @@ TECHNICAL: Return values/promises from .then() to chain operations.
 One .catch() handles errors chain-wide. [web:1]
 */
 
-fetch("https://jsonplaceholder.typicode.com/todos/1")
-  .then((res) => {
-    if (!res.ok) throw new Error("Network error");
-    return res.json();
-  })
-  .then((data) => console.log("Chained data:", data))
-  .catch((err) => console.error(err));
+// fetch("https://jsonplaceholder.typicode.com/todos/1")
+//   .then((res) => {
+//     if (!res.ok) throw new Error("Network error");
+//     return res.json();
+//   })
+//   .then((data) => console.log("Chained data:", data))
+//   .catch((err) => console.error(err));
 
 ////////////////////////////////////////////////////////////////////////
 // 4. ASYNC / AWAIT
@@ -830,17 +830,17 @@ TECHNICAL: async functions return promises. await pauses until promise resolves.
 Use try/catch for errors. [web:1]
 */
 
-async function getData() {
-  try {
-    const res = await fetch("https://jsonplaceholder.typicode.com/todos/1");
-    if (!res.ok) throw new Error("Network error");
-    const data = await res.json();
-    console.log("Async/await data:", data);
-  } catch (err) {
-    console.error(err);
-  }
-}
-getData();
+// async function getData() {
+//   try {
+//     const res = await fetch("https://jsonplaceholder.typicode.com/todos/1");
+//     if (!res.ok) throw new Error("Network error");
+//     const data = await res.json();
+//     console.log("Async/await data:", data);
+//   } catch (err) {
+//     console.error(err);
+//   }
+// }
+// getData();
 
 ////////////////////////////////////////////////////////////////////////
 // 5. FETCH API
@@ -853,17 +853,17 @@ TECHNICAL: fetch(url) returns Response promise. Check response.ok (200-299)
 before .json(). [web:1]
 */
 
-async function fetchData() {
-  try {
-    const res = await fetch("https://jsonplaceholder.typicode.com/todos/1");
-    if (!res.ok) throw new Error("Failed");
-    const data = await res.json();
-    console.log("Fetch API data:", data);
-  } catch (err) {
-    console.error(err);
-  }
-}
-fetchData();
+// async function fetchData() {
+//   try {
+//     const res = await fetch("https://jsonplaceholder.typicode.com/todos/1");
+//     if (!res.ok) throw new Error("Failed");
+//     const data = await res.json();
+//     console.log("Fetch API data:", data);
+//   } catch (err) {
+//     console.error(err);
+//   }
+// }
+// fetchData();
 
 ////////////////////////////////////////////////////////////////////////
 // 6. ERROR HANDLING
@@ -876,17 +876,51 @@ TECHNICAL: .catch() for promises, try/catch for async/await and sync code. [web:
 */
 
 // Promise error handling
-Promise.reject("Error!").catch((err) => console.error("Promise caught:", err));
+// Promise.reject("Error!").catch((err) => console.error("Promise caught:", err));
 
-async function safeAsync() {
-  try {
-    await Promise.reject("Async error!");
-  } catch (err) {
-    console.error("Async caught:", err);
-  }
-}
-safeAsync();
+// async function safeAsync() {
+//   try {
+//     await Promise.reject("Async error!");
+//   } catch (err) {
+//     console.error("Async caught:", err);
+//   }
+// }
+// safeAsync();
 
 //////////////////////////////////////////////////////////////////////
 
 // -----------------------------------------------------------------------------
+
+const getAllProducts = async () => {
+  try {
+    const res = await fetch("https://fakestoreapi.com/products");
+    const productsJson = await res.json();
+    const products = productsJson.slice(0, 5);
+    console.log(productsJson, "productsJson");
+    console.log(products, "fiveProducts");
+
+    const productsContainer = document.getElementById("products-container");
+    products.forEach((product) => {
+      const card = document.createElement("div");
+      card.classList.add("product-card");
+      card.setAttribute("data-id", product.id);
+
+      card.innerHTML = `
+        <img src=${product.image} alt="" style="width:100px" />
+        <h3>${product.title}</h3>
+        <p>${product.price}</p>
+        <p>
+            <label> Qty</label>
+            <input class="qty" type="text" />
+        </p>
+        <button>Add to Cart</button>
+      `;
+      productsContainer.appendChild(card);
+    });
+  } catch (error) {
+    console.log(error, "producte error");
+  }
+};
+getAllProducts();
+
+
